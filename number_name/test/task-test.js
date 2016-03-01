@@ -1,4 +1,4 @@
-describe('splitNumberString', function() {
+describe('splitNumber', function() {
   var inputs;
 
   beforeEach(function() {
@@ -9,13 +9,38 @@ describe('splitNumberString', function() {
 
     var outputs = [];
     for (var i = 0; i < inputs.length; i++) {
-      outputs.push(splitNumberString(inputs[i]));
+      outputs.push(splitNumber(inputs[i]));
     }
 
     var expectObject = [
       ['3', '112', '603'],
       ['1','001'],
       ['2']
+    ];
+
+    expect(outputs).toEqual(expectObject);
+  });
+});
+
+describe('translateNumbers', function() {
+  var inputs;
+
+  beforeEach(function() {
+    inputs = ['', '43', '123'];
+    digitsWords = loadDigitsWords();
+  });
+
+  it('shoult translate hundred', function() {
+
+    var outputs = [];
+    for (var i = 0; i < inputs.length; i++) {
+      outputs.push(translateHundreds(inputs[i], digitsWords));
+    }
+
+    var expectObject = [
+      '',
+      '',
+      'one hundred'
     ];
 
     expect(outputs).toEqual(expectObject);

@@ -1,4 +1,6 @@
-function loadSpecialNumberStr() {
+var partLength = 3;
+
+function loadDigitsWords() {
   return [
     'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
     'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
@@ -6,7 +8,7 @@ function loadSpecialNumberStr() {
   ];
 }
 
-function loadTens() {
+function loadTensWords() {
   return [
     '', 'ten', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy',
     'eighty', 'ninety'
