@@ -1,16 +1,20 @@
-function splitNumberString(numberString) {
-  numberString = reverseString(numberString);
-  var partsCount = Math.ceil(numberString.length / 3);
-  var partLength = 3;
+function translateNumbersToName(number) {
+  var numbers = splitNumber(number);
+  var names = translateNumbers(numbers);
+}
 
-  var numberStrings = [];
+function splitNumber(number) {
+  number = reverseString(number);
+  var partsCount = Math.ceil(number.length / 3);
+
+  var numbers = [];
   for (var i = partsCount - 1; i >= 0; i--) {
     var startIndex = i * 3;
-    var partString = reverseString(numberString.substr(startIndex, partLength));
-    numberStrings.push(partString);
+    var partString = reverseString(number.substr(startIndex, 3));
+    numbers.push(partString);
   }
 
-  return numberStrings;
+  return numbers;
 }
 
 function reverseString(str) {
@@ -19,4 +23,23 @@ function reverseString(str) {
     reversedStr += str[i];
   }
   return reversedStr;
+}
+
+function translateNumbers(numbers) {
+
+  var names = [];
+  for (var i = 0; i < numbers.length; i++) {
+
+  }
+}
+
+function translateHundreds(number, digitsWords) {
+  if (number.length == 3) {
+    return digitsWords[parseInt(number.charAt(0))] + ' hundred';
+  }
+  return '';
+}
+
+function translateTens(number) {
+
 }
