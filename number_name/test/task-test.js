@@ -18,6 +18,6 @@ describe('splitNumberString', function() {
       ['2']
     ];
 
-    expect(output).toEqual(expectObject);
+    expect(outputs).toEqual(expectObject);
   });
 });
