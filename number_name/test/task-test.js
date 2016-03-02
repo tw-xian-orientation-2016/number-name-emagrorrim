@@ -84,3 +84,33 @@ describe('translateNumbers', function() {
   });
 
 });
+
+describe('addUnit', function() {
+  var inputs;
+
+  beforeEach(function() {
+    inputs = [
+      ['twelve', 'one hundred and twenty three', ''],
+      ['one hundred and twenty three','one hundred and twenty three'],
+      ['one hundred and twenty three']
+    ];
+    digitsWords = loadDigitsWords();
+    tensWords = loadTensWords();
+  });
+
+  it('shoult add unit', function() {
+
+    var outputs = [];
+    for (var i = 0; i < inputs.length; i++) {
+      outputs.push(addUnit(inputs[i]));
+    }
+
+    var expectObject = [
+      ['twelve million', 'one hundred and twenty three thousand', ''],
+      ['one hundred and twenty three thousand', 'one hundred and twenty three'],
+      ['one hundred and twenty three']
+    ];
+
+    expect(outputs).toEqual(expectObject);
+  });
+});
