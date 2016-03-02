@@ -1,20 +1,20 @@
-function translateNumbersToName(number) {
-  var numbers = splitNumber(number);
-  var names = translateNumbers(numbers);
+function translateNumberStrsToName(numberStr) {
+  var numberStrs = splitNumberStr(numberStr);
+  var names = translateNumberStrs(numberStrs);
 }
 
-function splitNumber(number) {
-  number = reverseString(number);
-  var partsCount = Math.ceil(number.length / 3);
+function splitNumber(numberStr) {
+  numberStr = reverseString(numberStr);
+  var partsCount = Math.ceil(numberStr.length / 3);
 
-  var numbers = [];
+  var numberStrs = [];
   for (var i = partsCount - 1; i >= 0; i--) {
     var startIndex = i * 3;
-    var partString = reverseString(number.substr(startIndex, 3));
-    numbers.push(partString);
+    var partString = reverseString(numberStr.substr(startIndex, 3));
+    numberStrs.push(partString);
   }
 
-  return numbers;
+  return numberStrs;
 }
 
 function reverseString(str) {
@@ -25,21 +25,34 @@ function reverseString(str) {
   return reversedStr;
 }
 
-function translateNumbers(numbers) {
-
+function translateNumbers(numberStrs, digitsWords, tensWords) {
   var names = [];
-  for (var i = 0; i < numbers.length; i++) {
-
+  for (var i = 0; i < numberStrs.length; i++) {
+    numberStr = numberStrs[i]
+    var hundred = translateHundreds(numberStr, digitsWords);
+    var twoDigit = translateTensAndDigits(numberStr, digitsWords, tensWords);
+    var name = (hundred && twoDigit) ?
+               (hundred + ' ' + 'and' + ' ' + twoDigit) : (hundred + twoDigit);
+    names.push(name);
   }
+
+  return names;
 }
 
-function translateHundreds(number, digitsWords) {
-  if (number.length == 3) {
-    return digitsWords[parseInt(number.charAt(0))] + ' hundred';
+function translateHundreds(numberStr, digitsWords) {
+  if (numberStr.length == 3 && numberStr.charAt(0) != '0') {
+    return digitsWords[parseInt(numberStr.charAt(0))] + ' hundred';
   }
   return '';
 }
 
-function translateTens(number) {
-
+function translateTensAndDigits(numberStr, digitsWords, tensWords) {
+  var twoDigit = parseInt(numberStr) % 100;
+  if (twoDigit < 20) {
+    return digitsWords[twoDigit];
+  } else {
+    var tens = parseInt(twoDigit / 10);
+    var digit = parseInt(twoDigit % 10);
+    return tensWords[tens] + ' ' + digitsWords[digit];
+  }
 }
