@@ -56,3 +56,13 @@ function translateTensAndDigits(numberStr, digitsWords, tensWords) {
     return tensWords[tens] + ' ' + digitsWords[digit];
   }
 }
+
+function addUnit(names) {
+  if (names[names.length - 2]) {
+    names[names.length - 2] += ' thousand';
+  }
+  if (names[names.length - 3]) {
+    names[names.length - 3] += ' million';
+  }
+  return names;
+}
