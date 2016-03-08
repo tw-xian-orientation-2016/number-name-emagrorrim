@@ -66,3 +66,37 @@ function addUnit(names) {
   }
   return names;
 }
+
+function formatNames(names) {
+  var formatName = '';
+
+  addComma(names);
+  addAnd(names);
+
+  for (var i = 0; i < names.length; i++) {
+    formatName += names[i];
+  }
+
+  return formatName;
+}
+
+function addAnd(names) {
+  if (names[1] && names[1].indexOf(' and ') == -1) {
+    names[1] = ' and ' + names[1];
+  }
+  if (names[2] && names[1] && names[2].indexOf(' and ') == -1) {
+    names[2] = ' and ' + names[2];
+  }
+}
+
+function addComma(names) {
+  if (names.length == 3 && names[1] == '' && names[0] && names[2].indexOf(' and ') != -1) {
+    names[0] += ',';
+  }
+  for (var i = 0; i < names.length; i++) {
+    var next = names[i+1];
+    if ((next||names[i+2]) && names[i] && next.indexOf(' and ') != -1) {
+      names[i] += ',';
+    }
+  }
+}
