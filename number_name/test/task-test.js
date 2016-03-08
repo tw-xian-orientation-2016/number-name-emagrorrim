@@ -91,11 +91,10 @@ describe('addUnit', function() {
   beforeEach(function() {
     inputs = [
       ['twelve', 'one hundred and twenty three', ''],
+      ['twelve', '', 'one hundred and twenty three'],
       ['one hundred and twenty three','one hundred and twenty three'],
       ['one hundred and twenty three']
     ];
-    digitsWords = loadDigitsWords();
-    tensWords = loadTensWords();
   });
 
   it('shoult add unit', function() {
@@ -107,8 +106,41 @@ describe('addUnit', function() {
 
     var expectObject = [
       ['twelve million', 'one hundred and twenty three thousand', ''],
+      ['twelve million', '', 'one hundred and twenty three'],
       ['one hundred and twenty three thousand', 'one hundred and twenty three'],
       ['one hundred and twenty three']
+    ];
+
+    expect(outputs).toEqual(expectObject);
+  });
+});
+
+describe('format name', function() {
+  var inputs;
+
+  beforeEach(function() {
+    inputs = [
+      ['twelve million', 'one hundred and twenty three thousand', ''],
+      ['twelve million', '', 'one hundred and twenty three'],
+      ['one hundred and twenty three thousand', 'one hundred and twenty three'],
+      ['one hundred and twenty three'],
+      ['one hundred and twenty three', 'twenty three', 'twenty three']
+    ];
+  });
+
+  it('shoult format names', function() {
+
+    var outputs = [];
+    for (var i = 0; i < inputs.length; i++) {
+      outputs.push(formatNames(inputs[i]));
+    }
+
+    var expectObject = [
+      'twelve million,one hundred and twenty three thousand',
+      'twelve million,one hundred and twenty three',
+      'one hundred and twenty three thousand,one hundred and twenty three',
+      'one hundred and twenty three',
+      'one hundred and twenty three and twenty three and twenty three'
     ];
 
     expect(outputs).toEqual(expectObject);
